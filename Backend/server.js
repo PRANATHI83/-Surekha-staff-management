@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3014;
+const port = process.env.PORT || 3015;
 
 // Middleware
 app.use(cors());
@@ -173,6 +173,7 @@ app.delete('/api/employees/:empId', async (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
-    console.log(`Server running on port13.201.36.187 ${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server running on port ${port}`);
 });
+
