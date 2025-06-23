@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: staff_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin234
+      POSTGRES_DB: staff_db
+    ports:
+      - "5448:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./Backend
+    container_name: staff_backend
+    ports:
+      - "3014:3014"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: admin234
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: staff_db
+      PORT: 3014
+    depends_on:
+      - postgres
+
+  staff:
+    build: ./Staff
+    container_name: staff_ui
+    ports:
+      - "8024:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+
