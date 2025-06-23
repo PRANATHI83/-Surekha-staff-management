@@ -174,5 +174,5 @@ app.delete('/api/employees/:empId', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server running on port 13.201.36.187 ${port}`);
+    console.log(`Server running on port ${port}`);
 });
